@@ -2,8 +2,8 @@
 languagesystem DFLT dflt;
 languagesystem latn dflt;
 
-# A => start
-# Z => end
+# A => number start
+# Z => number end
 # Q => % 3 == 0
 # W => % 3 == 1
 # E => % 3 == 2
@@ -11,6 +11,7 @@ languagesystem latn dflt;
 # T => fizz
 # Y => buzz
 
+# wrap each digit: ... => A.Z A.Z A.Z
 lookup A {
   sub zero' by A zero Z;
   sub one' by A one Z;
@@ -24,6 +25,7 @@ lookup A {
   sub nine' by A nine Z;
 } A;
 
+# remove ZA: ... => A...Z
 lookup B {
   sub zero Z A by zero;
   sub one Z A by one;
@@ -37,7 +39,8 @@ lookup B {
   sub nine Z A by nine;
 } B;
 
-lookup D {
+# start trickle: A0 => A0Q
+lookup C {
   sub A zero' by zero Q;
   sub A three' by three Q;
   sub A six' by six Q;
@@ -50,9 +53,10 @@ lookup D {
   sub A two' by two E;
   sub A five' by five E;
   sub A eight' by eight E;
-} D;
+} C;
 
-lookup E {
+# continue trickle
+lookup D {
   sub Q zero' by zero Q;
   sub Q three' by three Q;
   sub Q six' by six Q;
@@ -85,9 +89,10 @@ lookup E {
   sub E two' by two W;
   sub E five' by five W;
   sub E eight' by eight W;
-} E;
+} D;
 
-lookup F {
+# end trickle
+lookup E {
   sub zero Q Z by R; #fizzbuzz
   sub five Q Z by R; #fizzbuzz
   sub zero W Z by T; #buzz
@@ -95,9 +100,10 @@ lookup F {
   sub zero E Z by T; #buzz
   sub five E Z by T; #buzz
   sub Q Z by Y; #fizz
-} F;
+} E;
 
-lookup G {
+# cleanup
+lookup F {
   rsub Q' R by R;
   rsub W' R by R;
   rsub E' R by R;
@@ -111,9 +117,7 @@ lookup G {
   rsub seven' R by R;
   rsub eight' R by R;
   rsub nine' R by R;
-} G;
 
-lookup H {
   rsub Q' T by T;
   rsub W' T by T;
   rsub E' T by T;
@@ -127,9 +131,7 @@ lookup H {
   rsub seven' T by T;
   rsub eight' T by T;
   rsub nine' T by T;
-} H;
 
-lookup I {
   rsub Q' Y by Y;
   rsub W' Y by Y;
   rsub E' Y by Y;
@@ -143,22 +145,21 @@ lookup I {
   rsub seven' Y by Y;
   rsub eight' Y by Y;
   rsub nine' Y by Y;
-} I;
+} F;
 
-lookup J {
+# display
+lookup G {
   sub A' Y by f i z z;
   sub A' T by b u z z;
   sub A' R by f i z z b u z z;
-} J;
+} G;
 
 feature calt {
-  lookup A; # wrap ... => A.Z A.Z A.Z
-  lookup B; # remove ZA => A...Z
-  lookup D; # start trickle => A0 => A0Q
-  lookup E; # continue trickle
-  lookup F; # end trickle
-  lookup G; # cleanup
-  lookup H; # cleanup
-  lookup I; # cleanup
-  lookup J; # display
+  lookup A; # wrap each digit: ... => A.Z A.Z A.Z
+  lookup B; # remove ZA: ... => A...Z
+  lookup C; # start trickle: A0 => A0Q
+  lookup D; # continue trickle
+  lookup E; # end trickle
+  lookup F; # cleanup
+  lookup G; # display
 } calt;
