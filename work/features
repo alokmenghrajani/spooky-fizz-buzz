@@ -1,0 +1,164 @@
+# Tell OpenType to use a system with fancy shaping features for latin characters
+languagesystem DFLT dflt;
+languagesystem latn dflt;
+
+# A => start
+# Z => end
+# Q => % 3 == 0
+# W => % 3 == 1
+# E => % 3 == 2
+# R => fizzbuzz
+# T => fizz
+# Y => buzz
+
+lookup A {
+  sub zero' by A zero Z;
+  sub one' by A one Z;
+  sub two' by A two Z;
+  sub three' by A three Z;
+  sub four' by A four Z;
+  sub five' by A five Z;
+  sub six' by A six Z;
+  sub seven' by A seven Z;
+  sub eight' by A eight Z;
+  sub nine' by A nine Z;
+} A;
+
+lookup B {
+  sub zero Z A by zero;
+  sub one Z A by one;
+  sub two Z A by two;
+  sub three Z A by three;
+  sub four Z A by four;
+  sub five Z A by five;
+  sub six Z A by six;
+  sub seven Z A by seven;
+  sub eight Z A by eight;
+  sub nine Z A by nine;
+} B;
+
+lookup D {
+  sub A zero' by zero Q;
+  sub A three' by three Q;
+  sub A six' by six Q;
+  sub A nine' by nine Q;
+
+  sub A one' by one W;
+  sub A four' by four W;
+  sub A seven' by seven W;
+
+  sub A two' by two E;
+  sub A five' by five E;
+  sub A eight' by eight E;
+} D;
+
+lookup E {
+  sub Q zero' by zero Q;
+  sub Q three' by three Q;
+  sub Q six' by six Q;
+  sub Q nine' by nine Q;
+  sub Q one' by one W;
+  sub Q four' by four W;
+  sub Q seven' by seven W;
+  sub Q two' by two E;
+  sub Q five' by five E;
+  sub Q eight' by eight E;
+
+  sub W zero' by zero W;
+  sub W three' by three W;
+  sub W six' by six W;
+  sub W nine' by nine W;
+  sub W one' by one E;
+  sub W four' by four E;
+  sub W seven' by seven E;
+  sub W two' by two Q;
+  sub W five' by five Q;
+  sub W eight' by eight Q;
+
+  sub E zero' by zero E;
+  sub E three' by three E;
+  sub E six' by six E;
+  sub E nine' by nine E;
+  sub E one' by one Q;
+  sub E four' by four Q;
+  sub E seven' by seven Q;
+  sub E two' by two W;
+  sub E five' by five W;
+  sub E eight' by eight W;
+} E;
+
+lookup F {
+  sub zero Q Z by R; #fizzbuzz
+  sub five Q Z by R; #fizzbuzz
+  sub zero W Z by T; #buzz
+  sub five W Z by T; #buzz
+  sub zero E Z by T; #buzz
+  sub five E Z by T; #buzz
+  sub Q Z by Y; #fizz
+} F;
+
+lookup G {
+  rsub Q' R by R;
+  rsub W' R by R;
+  rsub E' R by R;
+  rsub zero' R by R;
+  rsub one' R by R;
+  rsub two' R by R;
+  rsub three' R by R;
+  rsub four' R by R;
+  rsub five' R by R;
+  rsub six' R by R;
+  rsub seven' R by R;
+  rsub eight' R by R;
+  rsub nine' R by R;
+} G;
+
+lookup H {
+  rsub Q' T by T;
+  rsub W' T by T;
+  rsub E' T by T;
+  rsub zero' T by T;
+  rsub one' T by T;
+  rsub two' T by T;
+  rsub three' T by T;
+  rsub four' T by T;
+  rsub five' T by T;
+  rsub six' T by T;
+  rsub seven' T by T;
+  rsub eight' T by T;
+  rsub nine' T by T;
+} H;
+
+lookup I {
+  rsub Q' Y by Y;
+  rsub W' Y by Y;
+  rsub E' Y by Y;
+  rsub zero' Y by Y;
+  rsub one' Y by Y;
+  rsub two' Y by Y;
+  rsub three' Y by Y;
+  rsub four' Y by Y;
+  rsub five' Y by Y;
+  rsub six' Y by Y;
+  rsub seven' Y by Y;
+  rsub eight' Y by Y;
+  rsub nine' Y by Y;
+} I;
+
+lookup J {
+  sub A' Y by f i z z;
+  sub A' T by b u z z;
+  sub A' R by f i z z b u z z;
+} J;
+
+feature calt {
+  lookup A; # wrap ... => A.Z A.Z A.Z
+  lookup B; # remove ZA => A...Z
+  lookup D; # start trickle => A0 => A0Q
+  lookup E; # continue trickle
+  lookup F; # end trickle
+  lookup G; # cleanup
+  lookup H; # cleanup
+  lookup I; # cleanup
+  lookup J; # display
+} calt;
