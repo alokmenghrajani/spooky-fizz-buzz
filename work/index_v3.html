@@ -15,6 +15,7 @@
     }
     div {
       font-family: "spooky";
+      font-feature-settings: "calt" 1;
     }
     script {
       display: block;
@@ -25,11 +26,12 @@
 </head>
 <body>
   <div>IF YOU CAN READ THIS THEN SOMETHING IS WRONG</div>
+  <!-- this version works in Safari and iOS -->
+
   <script>
 // 🎃👻🕷️Happy halloween! This is a spooky fizzbuzz!
 // We simply print incrementing numbers in a loop and
 // something takes care of displaying fizz, buzz or fizzbuzz.
-// note: doesn't seem to work on Safari for some reason...
 
 fizzbuzz = 1;
 setInterval(() => {

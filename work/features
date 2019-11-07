@@ -91,7 +91,7 @@ lookup D {
   sub E eight' by eight W;
 } D;
 
-# end trickle
+# end trickle. There's probably a way to simplify things by dropping the fizzbuzz state.
 lookup E {
   sub zero Q Z by R; #fizzbuzz
   sub five Q Z by R; #fizzbuzz
@@ -102,7 +102,7 @@ lookup E {
   sub Q Z by Y; #fizz
 } E;
 
-# cleanup
+# cleanup.
 lookup F {
   rsub Q' R by R;
   rsub W' R by R;
@@ -147,7 +147,7 @@ lookup F {
   rsub nine' Y by Y;
 } F;
 
-# display
+# display. We could probably avoid this step and have the Y, T and R states contain modified glyphs.
 lookup G {
   sub A' Y by f i z z;
   sub A' T by b u z z;

@@ -9,7 +9,7 @@ Source for https://www.quaxio.com/spooky_fizz_buzz/
     docker run -v `pwd`/work:/work --rm -it spooky-fizz-buzz:latest bash
     /work/build.sh
 
-Then open work/index.html in your browser.
+Then open work/index_v1.html in your browser.
 
 ## Known issues
 
