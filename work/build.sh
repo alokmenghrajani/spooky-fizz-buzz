@@ -39,6 +39,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?><glyph name="W" format="1"><unicode 
 echo '<?xml version="1.0" encoding="UTF-8"?><glyph name="X" format="1"><unicode hex="0058"/><advance width="0"/></glyph>' > tmp/font.ufo/glyphs.com.adobe.type.processedGlyphs/X_.glif
 echo '<?xml version="1.0" encoding="UTF-8"?><glyph name="Y" format="1"><unicode hex="0059"/><advance width="0"/></glyph>' > tmp/font.ufo/glyphs.com.adobe.type.processedGlyphs/Y_.glif
 echo '<?xml version="1.0" encoding="UTF-8"?><glyph name="Z" format="1"><unicode hex="005A"/><advance width="0"/></glyph>' > tmp/font.ufo/glyphs.com.adobe.type.processedGlyphs/Z_.glif
+echo '<?xml version="1.0" encoding="UTF-8"?><glyph name="." format="1"><unicode hex="002E"/><advance width="0"/></glyph>' > tmp/font.ufo/glyphs.com.adobe.type.processedGlyphs/period.glif
 
 # Call makeotf
 cd tmp/
